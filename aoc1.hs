@@ -17,8 +17,15 @@ calc :: Integer -> Integer
 calc i = (i `div` 3) - 2
 
 allFuel :: [Integer] -> [Integer]
-allFuel xs = (map calc xs)
+allFuel xs = (map calcExtra xs)
 
 fuelSum :: [Integer] -> Integer
 fuelSum [] = 0
 fuelSum (x:xs) = x + fuelSum xs
+
+calcExtra :: Integer -> Integer
+calcExtra i = let fuel = calc i in 
+    case fuel < 0 of
+        True -> 0
+        otherwise -> fuel + calcExtra fuel
+
